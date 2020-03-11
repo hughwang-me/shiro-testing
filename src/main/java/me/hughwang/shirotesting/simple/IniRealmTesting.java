@@ -4,38 +4,31 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.DefaultSecurityManager;
-import org.apache.shiro.realm.SimpleAccountRealm;
+import org.apache.shiro.realm.text.IniRealm;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 
-//@Service
+@Service
 @Slf4j
-public class SimpleRoleTesting {
-
-    private DefaultSecurityManager securityManager = new DefaultSecurityManager();
-
-    private SimpleAccountRealm simpleAccountRealm = new SimpleAccountRealm();
+public class IniRealmTesting {
 
     @PostConstruct
     public void run(){
-        log.warn("测试 Shiro 简单认证");
-
-        simpleAccountRealm.addAccount("wanghuan" , "123456" , "admin");
-        securityManager.setRealm(simpleAccountRealm);
+        DefaultSecurityManager securityManager = new DefaultSecurityManager();
+        IniRealm iniRealm = new IniRealm("classpath:iniRealm.ini");
+//        iniRealm.setResourcePath("classpath:iniRealm.ini");
+        securityManager.setRealm(iniRealm);
 
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
 
         UsernamePasswordToken token = new UsernamePasswordToken("wanghuan","123456");
-
         subject.login(token);
+        log.warn("是否登录成功:{}" , subject.isAuthenticated());
 
-        log.warn("认证是否成功:{}" , subject.isAuthenticated());
-
-        subject.checkRoles("admin1");
-
+        subject.checkRoles("admin");
+        subject.checkPermissions("delete","update");
     }
-
 }
