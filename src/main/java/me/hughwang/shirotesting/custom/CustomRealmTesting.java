@@ -18,7 +18,7 @@ public class CustomRealmTesting {
 
     @PostConstruct
     public void run(){
-        log.warn("测试JDBC验证");
+        log.warn("测试 CustomRealmTesting 验证");
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
 
         CustomRealm customRealm = new CustomRealm();
