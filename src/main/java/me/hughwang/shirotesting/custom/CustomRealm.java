@@ -23,7 +23,7 @@ public class CustomRealm extends AuthorizingRealm {
     Map<String , String> userMap = new HashMap<>();
 
     {
-        userMap.put("wanghuan","ca8da29ce515498a136da4a4d2256d8a");
+        userMap.put("wanghuan","123456");
     }
 
     @Override
@@ -55,7 +55,7 @@ public class CustomRealm extends AuthorizingRealm {
             return null;
         }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username , passwordAuth , "CustomRealm");
-        authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes("uwjx")); //对加盐解析
+//        authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes("uwjx")); //对加盐解析
         return authenticationInfo;
     }
 
