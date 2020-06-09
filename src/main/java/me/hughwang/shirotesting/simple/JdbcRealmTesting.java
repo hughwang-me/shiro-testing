@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 
-//@Service
+@Service
 @Slf4j
 public class JdbcRealmTesting {
 
@@ -26,6 +26,8 @@ public class JdbcRealmTesting {
 
     @PostConstruct
     public void run(){
+
+        log.warn("JdbcRealmTesting@@@@@@@@");
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
         JdbcRealm realm = new JdbcRealm();
 
@@ -39,6 +41,7 @@ public class JdbcRealmTesting {
 
         String permissionSql = "select permission from permissions where role_name = ?";
         realm.setPermissionsQuery(permissionSql);
+        realm.setPermissionsLookupEnabled(true); //需要开启权限查询 默认关闭
 
         securityManager.setRealm(realm);
 
@@ -50,8 +53,9 @@ public class JdbcRealmTesting {
         log.warn("是否登录成功:{}" , subject.isAuthenticated());
 
         subject.checkRole("admin");
+        subject.checkRoles("admin" , "user");
         log.warn("检查角色成功");
-        subject.checkPermissions("delete","update");
+        subject.checkPermissions( "update" , "delete");
         log.warn("检查权限成功");
     }
 }

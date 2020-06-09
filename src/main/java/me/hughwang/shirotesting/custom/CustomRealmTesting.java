@@ -12,12 +12,13 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 
 
-@Service
+//@Service
 @Slf4j
 public class CustomRealmTesting {
 
     @PostConstruct
     public void run(){
+        log.warn("测试JDBC验证");
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
 
         CustomRealm customRealm = new CustomRealm();

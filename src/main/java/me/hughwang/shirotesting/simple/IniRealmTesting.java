@@ -16,6 +16,7 @@ public class IniRealmTesting {
 
     @PostConstruct
     public void run(){
+        log.warn("测试 IniRealm ");
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
         IniRealm iniRealm = new IniRealm("classpath:iniRealm.ini");
 //        iniRealm.setResourcePath("classpath:iniRealm.ini");

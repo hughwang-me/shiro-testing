@@ -28,7 +28,7 @@ public class SimpleLoginTesting {
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
 
-        UsernamePasswordToken token = new UsernamePasswordToken("wanghuan1","123456");
+        UsernamePasswordToken token = new UsernamePasswordToken("wanghuan","123456");
 
         subject.login(token);
 
