@@ -1,6 +1,7 @@
 package me.hughwang.shirotesting.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import me.hughwang.shirotesting.servvice.UserService;
 import me.hughwang.shirotesting.vo.UserVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 /**
  * @author :  Hugh Wang https://hughwang.me
  * @date : 2020/6/9 11:46
@@ -20,9 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("user")
 public class UserController {
 
+    @Resource
+    UserService userService;
+
     @PostMapping(value = "list")
     public String list(@RequestBody UserVO userVO){
-
+        userService.findUserByUsername(userVO);
         return "list 成功！";
     }
 

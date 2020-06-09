@@ -1,2 +1,32 @@
 server:
   port: 8092
+
+spring:
+  jackson:
+    default-property-inclusion: non_null #json过滤掉空字段
+  datasource:
+    url: jdbc:mysql://localhost:3306/uwjx?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: Uwjx@2020
+    #    driver-class-name:  com.mysql.jdbc.Driver
+    druid:
+      initial-size: 1 #初始化连接池的大小
+      max-active: 20 #最大连接数
+      max-wait: 60000 #最长等待时间
+      min-idle: 1 #最小连接数
+      time-between-eviction-runs-millis: 2000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+  redis:
+    host: "n.uwjx.com"
+    database: 10
+    port: 6379
+    password: Uwjx2019
+    timeout: 5000
+    jedis:
+      pool:
+        max-wait: 1
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+  servlet:
+    multipart:
+      max-file-size: 1024MB
